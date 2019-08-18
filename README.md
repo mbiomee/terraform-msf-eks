@@ -7,15 +7,15 @@
 General aws eks deploy using Terraform
 ---
 
-##for more info
-[Amazon Elastic Kubernetes Service](https://aws.amazon.com/eks/)
-[Terraform](https://www.terraform.io/)
+## for more info
+- [Amazon Elastic Kubernetes Service](https://aws.amazon.com/eks/)
+- [Terraform](https://www.terraform.io/)
 
 ## Caution
 applying this infrastructure will create resources on your aws account so be sure you have enough credits
 to see resources [click here](https://registry.terraform.io/modules/mbiomee/eks/msf/?tab=resources)
   
-##Prerequisites
+## Prerequisites
 
 1. aws account
 2. IAM role with AdminstratorAccess policy
@@ -23,7 +23,7 @@ to see resources [click here](https://registry.terraform.io/modules/mbiomee/eks/
 4. create ssh key and upload the public key to your EC2 region
 
 
-##Usage
+## Usage
 
 create main.tf file and pass your variables link example
 ```terraform
