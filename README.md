@@ -1,7 +1,7 @@
 # terraform-eks-msf
 
 
-[![TerraformRefigistry](https://img.shields.io/badge/Terraform%20Registry-v0.1.2-blue.svg)](https://registry.terraform.io/modules/mbiomee/eks/msf/)
+[![TerraformRefigistry](https://img.shields.io/badge/Terraform%20Registry-v1.0.2-blue.svg)](https://registry.terraform.io/modules/mbiomee/eks/msf/)
 
 
 General aws eks deploy using Terraform
