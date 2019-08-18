@@ -1,36 +1,34 @@
-# terraform-aws-eks
+# terraform-eks-msf
 
 
 [![TerraformRefigistry](https://img.shields.io/badge/Terraform%20Registry-v0.1.2-blue.svg)](https://registry.terraform.io/modules/mbiomee/eks/msf/)
 
 
-Deploy a full AWS EKS cluster with Terraform
+General aws eks deploy using Terraform
+---
 
-## What resources are created
+##for more info
+[Amazon Elastic Kubernetes Service](https://aws.amazon.com/eks/)
+[Terraform](https://www.terraform.io/)
 
-1. VPC
-2. Internet Gateway (IGW)
-3. Public and Private Subnets
-4. Security Groups, Route Tables and Route Table Associations
-5. IAM roles, instance profiles and policies
-6. An EKS Cluster
-7. Autoscaling group and Launch Configuration
-8. Worker Nodes in a private Subnet
-9. bastion host for ssh access to the VPC
-10. The ConfigMap required to register Nodes with EKS
-11. KUBECONFIG file to authenticate kubectl using the heptio authenticator aws binary
+## Caution
+applying this infrastructure will create resources on your aws account so be sure you have enough credits
+to see resources [click here](https://registry.terraform.io/modules/mbiomee/eks/msf/?tab=resources)
+  
+##Prerequisites
 
-## Usage
+1. aws account
+2. IAM role with AdminstratorAccess policy
+3. machine with aws cli, terraform cli, kubectl installed
+4. create ssh key and upload the public key to your EC2 region
 
-> **NOTE** use `version = "2.0.0"` with terraform `0.12.x >` and `version = 1.0.4` with terraform `< 0.11x`
 
-Have a look at the [examples](examples) for complete references
-You can use this module from the Terraform registry as a remote source:
+##Usage
 
+create main.tf file and pass your variables link example
 ```terraform
 module "eks" {
-  source  = "mbiomee/eks/msf"
-
+  source              = "mbiomee/eks/msf"
   aws-region          = "us-east-1"
   availability-zones  = ["us-east-1a", "us-east-1b", "us-east-1c"]
   cluster-name        = "msf-cluster"
@@ -65,8 +63,7 @@ output "config-map" {
 
 ```terraform
 module "eks" {
-  source  = "WesleyCharlesBlake/eks/aws"
-
+  source              = "mbiomee/eks/msf"
   aws-region          = var.aws-region
   availability-zones  = var.availability-zones
   cluster-name        = var.cluster-name
@@ -88,38 +85,6 @@ module "eks" {
 }
 ```
 
-### IAM
-
-The AWS credentials must be associated with a user having at least the following AWS managed IAM policies
-
-* IAMFullAccess
-* AutoScalingFullAccess
-* AmazonEKSClusterPolicy
-* AmazonEKSWorkerNodePolicy
-* AmazonVPCFullAccess
-* AmazonEKSServicePolicy
-* AmazonEKS_CNI_Policy
-* AmazonEC2FullAccess
-
-In addition, you will need to create the following managed policies
-
-*EKS*
-
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "eks:*"
-            ],
-            "Resource": "*"
-        }
-    ]
-}
-```
-
 ### Terraform
 
 You need to run the following commands to create the resources with Terraform:
@@ -130,7 +95,7 @@ terraform plan
 terraform apply
 ```
 
-> TIP: you should save the plan state `terraform plan -out eks-state` or even better yet, setup [remote storage](https://www.terraform.io/docs/state/remote.html) for Terraform state. You can store state in an [S3 backend](https://www.terraform.io/docs/backends/types/s3.html), with locking via DynamoDB
+
 
 ### Setup kubectl
 
